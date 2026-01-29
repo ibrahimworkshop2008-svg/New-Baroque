@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
 
-const connectDB = require("./DataBase/Connection");
+const connectDB = require("../DataBase/Connection");
 const app = express();
 
 // Middleware
@@ -15,8 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 // Routes
-app.use("/api/auth", require("./Routes/authRoute"));
-app.use("/api/products", require("./Routes/ProdouctRoute")); // spelling fix
+app.use("/api/auth", require("../Routes/authRoute"));
+app.use("/api/products", require("../Routes/ProdouctRoute"));
 
-// Start server
-app.listen(5000, () => console.log("Server running on port 5000"));
+// Test route (VERY IMPORTANT)
+app.get("/", (req, res) => {
+  res.send("Backend running on Vercel 🚀");
+});
+
+// ❌ app.listen hata do
+module.exports = app;
